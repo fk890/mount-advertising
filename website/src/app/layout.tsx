@@ -26,7 +26,7 @@ const basementGrotesque = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BSMNT @ Scrollytelling",
+  title: "Mount Advertising",
   description:
     "A demo website made exclusively to showcase a couple of cool animations powered by our new library, @bsmnt/scrollytelling.",
   viewport: {

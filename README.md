@@ -1,6 +1,6 @@
-# BSMNT Scrollytelling
+# Mount Advertising
 
-BSMNT Scrollytelling is a library for creating Scrollytelling animations. It's powered by GSAP ScrollTrigger, but abstracts away some things to make it work better with React.
+Mount Advertising is a demo website showcasing advanced scroll-based animations powered by GSAP ScrollTrigger and React.
 
 ![Frame 7](https://user-images.githubusercontent.com/40034115/233121992-12eb2448-4f62-4cba-b9a3-c0d3e9233aa7.jpg)
 
