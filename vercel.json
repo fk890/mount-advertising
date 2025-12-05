@@ -1,4 +1,3 @@
 {
-  "buildCommand": "npm run build --legacy-peer-deps",
-  "outputDirectory": "website/.next"
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
