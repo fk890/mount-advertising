@@ -97,14 +97,7 @@ export const Cyllinder: React.FC<CyllinderProps> = ({ experiments }) => {
                       )}
                     </Link>
 
-                    {author?.name && (
-                      <p className={s["credits"]}>
-                        <span>Made by</span>{" "}
-                        <Link href={author.url} target="_blank" rel="noopener">
-                          {author?.name}
-                        </Link>
-                      </p>
-                    )}
+                    {/* author credit removed per branding request */}
                   </div>
                 </div>
               );

@@ -13,8 +13,10 @@
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
+  background-color: #000; // ensure black background during pin
 
-  --svg-width: #{tovw(674px)};
+  // make the logo significantly larger by default
+  --svg-width: #{tovw(1200px)};
 
   --right: calc(50vw - var(--svg-width) / 2);
 }
@@ -29,7 +31,8 @@
   width: fit-content;
   white-space: nowrap;
   font-weight: 900;
-  font-size: tovw(500px);
+  // bump text size up so the marquee feels bolder
+  font-size: tovw(650px);
 
   cursor: default;
   user-select: none;
@@ -37,6 +40,7 @@
 
 .worldSvg {
   width: var(--svg-width);
-  height: tovw(467px);
+  // keep aspect ratio from viewBox; scale via width
+  height: auto;
   margin-left: tovw(80px);
 }

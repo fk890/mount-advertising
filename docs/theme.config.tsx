@@ -4,7 +4,9 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 
-export const siteURL = new URL(process.env.NEXT_PUBLIC_SCROLLY_URL)
+// Provide a safe fallback when NEXT_PUBLIC_SCROLLY_URL isn't set (e.g. local dev).
+const _siteUrlString = process.env.NEXT_PUBLIC_SCROLLY_URL || 'http://localhost:3000'
+export const siteURL = new URL(_siteUrlString)
 export const siteOrigin = siteURL.origin
 
 const defaultMeta = {
@@ -84,7 +86,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/basementstudio/scrollytelling/tree/main/docs',
   footer: {
-    text: '© basement.studio | ' + new Date().getFullYear(),
+    text: '© MountAdvertising Since 1988 | ' + new Date().getFullYear(),
   },
   primaryHue: 21,
   primarySaturation: 94,

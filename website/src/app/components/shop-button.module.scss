@@ -1,0 +1,19 @@
+.shopButton {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+  background-color: white;
+  border-radius: 999999px;
+  color: black;
+  padding: 0.25em 0.75em;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: color 0.2s, background-color 0.2s;
+}
+.shopButton:hover {
+  color: #FF4D00;
+  background-color: #f5f5f5;
+}

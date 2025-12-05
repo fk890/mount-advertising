@@ -8,20 +8,24 @@ const nextConfig = {
   images: {
     domains: ["lab.basement.studio"],
   },
-  rewrites: async () => [
-    {
-      source: "/:path*",
-      destination: `/:path*`,
-    },
-    {
-      source: "/docs",
-      destination: `${process.env.NEXT_PUBLIC_DOCS_URL}/docs`,
-    },
-    {
-      source: "/docs/:path*",
-      destination: `${process.env.NEXT_PUBLIC_DOCS_URL}/docs/:path*`,
-    },
-  ],
+  // Rewrites with a safe fallback for NEXT_PUBLIC_DOCS_URL
+  rewrites: async () => {
+    const _docsUrl = process.env.NEXT_PUBLIC_DOCS_URL || ''
+    return [
+      {
+        source: "/:path*",
+        destination: `/:path*`,
+      },
+      {
+        source: "/docs",
+        destination: `${_docsUrl}/docs`,
+      },
+      {
+        source: "/docs/:path*",
+        destination: `${_docsUrl}/docs/:path*`,
+      },
+    ]
+  },
 };
 
 module.exports = (_phase, { defaultConfig: _ }) => {

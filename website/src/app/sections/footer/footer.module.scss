@@ -44,6 +44,10 @@
       .QR {
         height: tovw(620px, "desktop-large", 320px);
         width: auto;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateY(-120%) scale(0.6);
       }
     }
   }
@@ -53,6 +57,11 @@
     margin-left: tovw(-8px);
     max-width: unset;
     margin-bottom: tovw(20px, "desktop-large", 16px);
+
+    /* ensure footer heading uses the site's Basement Grotesque font for visual consistency */
+    font-family: var(--font-basement-grotesque);
+    font-weight: 800;
+    text-transform: uppercase;
 
     @media screen and (max-width: 800px) {
       margin-left: -0.35vw;

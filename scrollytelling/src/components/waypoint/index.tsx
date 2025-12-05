@@ -13,7 +13,7 @@ import {
 import * as React from "react";
 import { useScrollytelling } from "../../primitive";
 import { getTweenTarget, buildDeclarativeTween } from "../../util";
-import { DataAttribute } from "../debugger/visualizer/shared-types";
+// ...existing code...
 import { useDispatcher } from "../../context";
 
 export function Waypoint(
@@ -85,7 +85,7 @@ export function Waypoint({
           rootId: timeline.data.id,
           isScrollytellingTween: true,
           label: waypointLabel,
-        } satisfies DataAttribute,
+        } as const,
       }
     );
 

@@ -3,19 +3,17 @@
 import Image from "next/image";
 import bsmtTeamImg from "../../../../public/footer/basement-team-footer.jpg";
 import * as Scrollytelling from "~/lib/scrollytelling-client";
-import QRImg from "../../../../public/footer/QR.svg";
+import QRImg from "../../../../public/footer/QR.svg.png";
 import confetti from "canvas-confetti";
 
 import s from "./footer.module.scss";
 import Link from "next/link";
 import { DottedDiv } from "../../components/dotted-container";
-import basementTeamSVG from "../../../../public/footer/basement-team.svg";
+// ...existing code...
 import { useMedia } from "../../../hooks/use-media";
 import { toVw } from "../../../lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-
-const ghHref = "https://github.com/basementstudio/scrollytelling";
 
 export const Footer = () => {
   const isDesktopSm = useMedia("(min-width: 1024px)");
@@ -28,7 +26,7 @@ export const Footer = () => {
           <Image
             className={s["team-img"]}
             src={bsmtTeamImg}
-            alt="Basement Team"
+            alt="Mount Advertising Team"
           />
           <div className={s["QR-container"]}>
             <Scrollytelling.Animation
@@ -37,23 +35,18 @@ export const Footer = () => {
                 end: 100,
                 from: {
                   y: "-120%",
-                  position: "absolute",
-                  x: isDesktopSm ? "-8vw" : toVw(-20),
                   scale: 0.6,
                 },
               }}
             >
-              <a href={ghHref} target="_blank" rel="noreferrer">
+              <a href="tel:+919929997419">
                 <Image className={s.QR} src={QRImg} alt="QR" />
               </a>
             </Scrollytelling.Animation>
           </div>
         </div>
-        <Image
-          className={s["footer-heading-text"]}
-          src={basementTeamSVG}
-          alt="basement team"
-        />
+  {/* textual footer heading for Mount Advertising */}
+  <h3 className={s["footer-heading-text"]}>MOUNT ADVERTISING</h3>
         <div className={s.links}>
           <div>
             <span>social media</span>
@@ -61,31 +54,34 @@ export const Footer = () => {
               {socials.map((social, idx) => (
                 <li key={idx}>
                   {idx !== 0 && <span>&nbsp;—&nbsp;</span>}
-                  <Link
-                    className="link"
-                    href={social.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {social.name}
-                  </Link>
+                  <span className="link">{social.name}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <span>get in touch</span>
-            <Link
-              className="link"
-              href="mailto:sayhi@basement.studio"
-              target="_blank"
-              rel="noreferrer"
-            >
-              sayhi@basement.studio
-            </Link>
+            <div className={s.contactRows}>
+              <div>
+                <Link
+                  className="link"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=mountadvertisingservices@gmail.com"
+                >
+                  mountadvertisingservices@gmail.com
+                </Link>
+              </div>
+              <div>
+                <Link
+                  className="link"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=armaan@mountadvertising"
+                >
+                  armaan@mountadvertising
+                </Link>
+              </div>
+            </div>
           </div>
           <div>
-            <span>@basement.studio llc {new Date().getFullYear()}</span>
+            <span>@MountAdvertising Since 1988</span>
             <span>all rights reserved</span>
           </div>
         </div>
@@ -136,22 +132,18 @@ const PreFooter = () => {
       />
       <div className={s["left-content"]}>
         <p>
-          Now we are talking! Say hello to our brand new scrollytelling library.
+          Now we are Talking! Say Hello to our Company Executive
         </p>
         <Terminal />
         <a
           className={clsx(s["gh-link"], "link")}
-          href={ghHref}
-          target="_blank"
-          rel="noreferrer"
+          href="tel:+919929997419"
         >
-          Check it out on GitHub
+          Reach out to us on call
         </a>
         <a
           className={s["mobile-qr-link"]}
-          href={ghHref}
-          target="_blank"
-          rel="noreferrer"
+          href="tel:+919929997419"
         >
           <Image className={s["QR-mobile"]} src={QRImg} alt="QR" />
         </a>
@@ -228,10 +220,10 @@ const Terminal = () => {
               <span key={idx} className={s.circle} />
             ))}
           </span>
-          <span className={s["terminal-title"]}>terminal</span>
+          <span className={s["terminal-title"]}>whatsapp</span>
         </div>
-        <DottedDiv className={s.content}>
-          <p ref={contentRef}>yarn add @bsmnt/scrollytelling</p>
+          <DottedDiv className={s.content}>
+          <p ref={contentRef}>Hello! Can You Customise Corporate Gifting</p>
           <button
             title="copy text"
             className={s["copy-button"]}
@@ -250,22 +242,8 @@ const Terminal = () => {
 };
 
 const socials = [
-  {
-    name: "twitter",
-    url: "https://twitter.com/basementstudio",
-  },
-  {
-    name: "instagram",
-    url: "https://www.instagram.com/basementdotstudio/",
-  },
-  {
-    name: "github",
-    url: "https://github.com/basementstudio",
-  },
-  {
-    name: "dribbble",
-    url: "https://dribbble.com/basementstudio",
-  },
+  { name: "twitter" },
+  { name: "instagram" },
 ];
 
 const CopiedNotification = ({ className }: { className?: string }) => {

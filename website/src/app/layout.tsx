@@ -1,4 +1,5 @@
 import "./css/global.scss";
+import { ShopButton } from "./components/shop-button";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { JetBrains_Mono } from "next/font/google";
@@ -70,7 +71,12 @@ export default function RootLayout({
         ["--font-jetbrains-mono" as string]: `${jetBrainsMono.style.fontFamily}, var(--font-system), sans-serif`,
       }}
     >
-      <body>{children}</body>
+      <body>
+        <div style={{ position: "fixed", top: 24, right: 24, zIndex: 9999 }}>
+          <ShopButton />
+        </div>
+        {children}
+      </body>
 
       <Analytics />
     </html>

@@ -25,7 +25,12 @@ const splitText = (text: string, wordClass?: string) => {
   return htmlWords;
 };
 
-const lines = ["We want to help", "make the internet", "everything it can be."];
+// Updated hero copy per user's request: three lines in uppercase
+const lines = [
+  "WE WANT TO HELP YOU",
+  "MAKE THE BRAND",
+  "EVERYTHING IT CAN BE.",
+];
 
 export const FallingCaps = () => {
   const splittedText = useMemo(

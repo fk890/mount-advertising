@@ -20,7 +20,7 @@ import {
 } from "./context";
 import { useScrollToLabel } from "./hooks/use-scroll-to-label";
 import { internalEventEmmiter } from "./util/internal-event-emmiter";
-import type { DataAttribute } from "./components/debugger/visualizer/shared-types";
+// ...existing code...
 
 const Debugger = React.lazy(() => import("./components/debugger"));
 
@@ -46,7 +46,6 @@ const Scrollytelling = ({
     | false
     | {
         label: string;
-        visualizer?: boolean;
         markers?: boolean;
       };
   /**
@@ -86,9 +85,6 @@ const Scrollytelling = ({
   const [timeline, setTimeline] = React.useState<gsap.core.Timeline>();
 
   const debugMarkers = debug ? debug.markers : false;
-  const debugVisualizer = debug
-    ? debug.visualizer ?? true // default to true if undefined
-    : false;
   const debugLabel = debug ? debug.label : undefined;
 
   // initialize timeline
@@ -117,13 +113,7 @@ const Scrollytelling = ({
       },
       paused: true,
       defaults: { ...defaults, duration: 1 },
-      data: {
-        id,
-        type: "root",
-        label: debugLabel ?? id,
-        debug: debugVisualizer,
-        isScrollytellingTween: true,
-      } satisfies DataAttribute,
+      data: { id, type: "root" },
     });
 
     tl.eventCallback("onUpdate", () => {
@@ -148,7 +138,7 @@ const Scrollytelling = ({
     trigger,
     id,
     debugMarkers,
-    debugVisualizer,
+    // ...existing code...
   ]);
 
   // rest tween to ensure timeline is always 100 long

@@ -19,7 +19,7 @@ export const LabIntro = () => {
             movementY: { value: -20, unit: "px" },
           }}
         >
-          <div className={s.pretitle}>
+            <div className={s.pretitle}>
             <svg
               width="5"
               height="9"
@@ -33,7 +33,7 @@ export const LabIntro = () => {
                 fill="#EFEFEF"
               />
             </svg>
-            <span>the lab</span>
+            <span>mount advertising</span>
           </div>
         </Scrollytelling.Parallax>
 
@@ -85,9 +85,10 @@ export const LabIntro = () => {
               fill="#EFEFEF"
             />
           </svg>
-          BSMNT LAB is carving out a vanguard position by combining intensive
-          technology with formal design expertise – we are making the internet
-          everything it can be.
+          We design and deploy dynamic LED screens, advertising frames and
+          large‑format display solutions for brands — fully managed from
+          artwork to installation so your message is vibrant, responsive and
+          ready for any campaign.
         </p>
 
         <div className={s.marquees}>
@@ -135,16 +136,16 @@ const Marquee = ({
           : "var(--color-white)",
       }}
     >
-      <div
-        className={clsx(s.marqueeAnimationContainer, reverse && s.reverse)}
-        data-marquee-animation-container
-      >
-        {Array.from({ length: 10 }, (_, i) => (
-          <div key={i} className={s.marqueeItem}>
-            the lab <LabSvg />
-          </div>
-        ))}
-      </div>
+            <div
+              className={clsx(s.marqueeAnimationContainer, reverse && s.reverse)}
+              data-marquee-animation-container
+            >
+              {Array.from({ length: 10 }, (_, i) => (
+                <div key={i} className={s.marqueeItem}>
+                  mount advertising <LabSvg />
+                </div>
+              ))}
+            </div>
     </div>
   );
 };
