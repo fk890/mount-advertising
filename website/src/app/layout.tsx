@@ -35,8 +35,14 @@ export const metadata: Metadata = {
     width: "device-width",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32.png', sizes: '32x32' },
+      { url: '/favicon-16.png', sizes: '16x16' },
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png'
   },
   manifest: "/manifest.webmanifest",
   twitter: {
