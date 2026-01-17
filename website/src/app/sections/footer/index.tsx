@@ -19,7 +19,7 @@ export const Footer = () => {
   const isDesktopSm = useMedia("(min-width: 1024px)");
 
   return (
-    <Scrollytelling.Root start="top 80%" debug={{ label: "Footer" }}>
+    <Scrollytelling.Root start="top bottom" end="bottom top" scrub={true} debug={{ label: "Footer" }}>
       <footer className={s.footer}>
         <PreFooter />
         <div className={s["imgs-container"]}>
@@ -31,11 +31,11 @@ export const Footer = () => {
           <div className={s["QR-container"]}>
             <Scrollytelling.Animation
               tween={{
-                start: 60,
-                end: 100,
+                start: 30,
+                end: 70,
                 from: {
-                  y: "-120%",
-                  scale: 0.6,
+                  y: "-200%",
+                  scale: 0.5,
                 },
               }}
             >
@@ -73,9 +73,9 @@ export const Footer = () => {
               <div>
                 <Link
                   className="link"
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=armaan@mountadvertising"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=Thearmaan@icloud.com"
                 >
-                  armaan@mountadvertising
+                  Thearmaan@icloud.com
                 </Link>
               </div>
             </div>
