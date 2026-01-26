@@ -1,0 +1,88 @@
+.card {
+  text-decoration: none;
+  display: block;
+}
+
+.cardShell {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.cardShell:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #c8ff00;
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.wishlist {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  color: #111;
+  font-size: 16px;
+}
+
+.info {
+  margin-top: 12px;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.originalPrice {
+  font-size: 12px;
+  color: #888;
+  text-decoration: line-through;
+}
+
+.deal {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #22c55e;
+}

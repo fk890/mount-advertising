@@ -4,9 +4,14 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
-  experimental: { appDir: true },
   images: {
-    domains: ["lab.basement.studio"],
+    domains: ["lab.basement.studio", "qyrdqdqlpqwqcateoidc.supabase.co", "wwtfkqnhgkdoabgdfydr.supabase.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.supabase.co",
+      },
+    ],
   },
   // Rewrites with a safe fallback for NEXT_PUBLIC_DOCS_URL
   rewrites: async () => {

@@ -1,0 +1,217 @@
+.page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 128px 0 80px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.searchForm {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.searchInputWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 16px 48px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 18px;
+  transition: border-color 200ms ease;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #c8ff00;
+}
+
+.clearButton {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: 999px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.clearButton:hover {
+  background: #333;
+  color: #fff;
+}
+
+.queryLabel {
+  margin-top: 16px;
+  color: #9ca3af;
+}
+
+.queryHighlight {
+  color: #c8ff00;
+  font-weight: 600;
+}
+
+.statusRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+  min-height: 240px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 2px solid rgba(200, 255, 0, 0.2);
+  border-bottom-color: #c8ff00;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.message {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.messageText {
+  color: #9ca3af;
+  font-size: 18px;
+}
+
+.errorText {
+  color: #f87171;
+  font-size: 18px;
+}
+
+.resultsCount {
+  color: #9ca3af;
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: block;
+  text-decoration: none;
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #333;
+  transition: border-color 200ms ease;
+}
+
+.card:hover {
+  border-color: #c8ff00;
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: #0f0f0f;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #c8ff00;
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+.productName {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 200ms ease;
+}
+
+.card:hover .productName {
+  color: #c8ff00;
+}
+
+.productMeta {
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.productPrice {
+  color: #c8ff00;
+  font-weight: 700;
+}

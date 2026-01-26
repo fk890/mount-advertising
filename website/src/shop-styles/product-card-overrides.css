@@ -1,0 +1,42 @@
+/* Product Grid - Matches Neon Attack reference exactly */
+
+.swarovski-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 1024px) {
+  .swarovski-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .swarovski-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .swarovski-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 12px;
+  }
+}
+
+.swarovski-product-card {
+  background-color: #ffffff;
+  text-align: left;
+  transition: box-shadow 0.3s ease;
+}
+
+.swarovski-product-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}

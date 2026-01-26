@@ -1,0 +1,471 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Consolidated styles - loaded after critical CSS */
+
+/* Mobile menu toggle - hide on desktop */
+.mobile-menu-toggle {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+}
+
+/* Line clamp utility for product descriptions */
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --neon-pink: #ff3df2;
+  --neon-cyan: #2df5ff;
+  --neon-lime: #c8ff00;
+  --neon-purple: #7c3aed;
+  --neon-dark: #0a0a0a;
+  --neon-card: #111218;
+}
+
+@keyframes neonGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 6px rgba(255, 61, 242, 0.55),
+      0 0 16px rgba(45, 245, 255, 0.35),
+      0 0 24px rgba(124, 58, 237, 0.25);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(45, 245, 255, 0.6),
+      0 0 22px rgba(255, 61, 242, 0.4),
+      0 0 30px rgba(124, 58, 237, 0.35);
+  }
+}
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 rgba(45, 245, 255, 0.0),
+      0 0 20px rgba(255, 61, 242, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 8px rgba(45, 245, 255, 0.35),
+      0 0 28px rgba(255, 61, 242, 0.35);
+  }
+}
+
+.neon-text {
+  color: #f3f4f6;
+  text-shadow:
+    0 0 6px rgba(255, 61, 242, 0.55),
+    0 0 14px rgba(45, 245, 255, 0.35);
+  animation: neonGlow 2.6s ease-in-out infinite alternate;
+}
+
+.neon-subtitle {
+  color: rgba(224, 231, 255, 0.7);
+  text-shadow: 0 0 8px rgba(45, 245, 255, 0.2);
+}
+
+.neon-border {
+  border: 1px solid rgba(45, 245, 255, 0.25);
+  box-shadow:
+    inset 0 0 12px rgba(45, 245, 255, 0.06),
+    0 0 24px rgba(255, 61, 242, 0.12);
+}
+
+.neon-card {
+  background: linear-gradient(180deg, rgba(18, 18, 26, 0.9), rgba(10, 10, 14, 0.95));
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.12),
+    0 0 30px rgba(45, 245, 255, 0.08);
+}
+
+.neon-nav {
+  background: rgba(10, 10, 12, 0.9);
+  border-bottom: 1px solid rgba(45, 245, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.nav-alert-bar {
+  background: #000;
+  border-bottom: 1px solid rgba(45, 245, 255, 0.2);
+  color: #f8fafc;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-promo-band {
+  background: linear-gradient(90deg, #a100ff, #ce00ff);
+  color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(45, 245, 255, 0.2);
+}
+
+.nav-alert-bar .inner,
+.nav-promo-band .inner,
+.nav-inner {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.25rem;
+  gap: 1rem;
+}
+
+.nav-shell {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.promo-inner {
+  justify-content: center;
+}
+
+.nav-promo-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.nav-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 2.5rem);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .nav-alert-bar .inner,
+  .nav-promo-band .inner,
+  .nav-inner {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .nav-promo-text {
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+.neon-link {
+  position: relative;
+  color: #f8fafc;
+  transition: color 0.2s ease;
+}
+
+.neon-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.neon-link:hover,
+.neon-link:focus {
+  color: #ffffff;
+}
+
+.neon-link:hover::after,
+.neon-link:focus::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.neon-chip {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  color: #0a0a0a;
+  box-shadow: 0 0 10px rgba(45, 245, 255, 0.4);
+}
+
+.neon-btn {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  color: #0a0a0a;
+  border: 1px solid rgba(45, 245, 255, 0.35);
+  box-shadow: 0 0 18px rgba(45, 245, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.neon-btn:hover,
+.neon-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px rgba(255, 61, 242, 0.45);
+}
+
+.neon-btn-secondary {
+  background: rgba(15, 15, 20, 0.8);
+  color: #f8fafc;
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  box-shadow: 0 0 16px rgba(124, 58, 237, 0.2);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100dvw;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Performance optimizations for animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Keyframes for fade-in-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation utility class */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* General link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Optimize scrolling performance */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix for navbar opacity issues across pages */
+nav {
+  opacity: 1 !important;
+}
+
+/* Fix for link hover in navbar */
+nav a:hover,
+nav a:focus {
+  opacity: 1 !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.zevany-hero-text {
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.font-display {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), serif;
+}
+
+/* Custom prose styles for product descriptions */
+.prose {
+  max-width: none;
+}
+
+.prose h3 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 400;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.prose ul {
+  margin: 1rem 0;
+}
+
+.prose li {
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+/* Utility classes for mobile optimization */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent horizontal overflow */
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.zevany-text {
+  font-size: 8rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  font-family: var(--font-cormorant);
+}
+
+/* More aggressive media queries to prevent text overflow on mobile */
+@media (max-width: 768px) {
+  .zevany-text {
+    font-size: 4.5rem;
+    letter-spacing: 0.08em;
+  }
+}
+@media (max-width: 480px) {
+  .zevany-text {
+    font-size: 3rem;
+    letter-spacing: 0.06em;
+  }
+}
+@media (max-width: 390px) {
+  .zevany-text {
+    font-size: 2.5rem; 
+    letter-spacing: 0.05em;
+  }
+}
+@media (max-width: 320px) {
+  .zevany-text {
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+  }
+}
+@media (max-width: 280px) {
+  .zevany-text {
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+  }
+}
+
+.swarovski-card .p-3,
+.swarovski-card .p-4 {
+  padding: 1rem;
+}
+
+.swarovski-card .group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.swarovski-card .group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+.swarovski-card .transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.swarovski-product-title,
+.swarovski-product-price {
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* Fix for product card text size on mobile */
+@media (max-width: 767px) {
+  .showcase-card-info h3 {
+    font-size: 0.9rem; /* Larger font size for name */
+  }
+  .showcase-card-info span {
+    font-size: 1rem; /* Larger font size for price */
+  }
+}

@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Locomotive Scroll CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* EXACT Locomotive Scroll Demo CSS */
+:root {
+  --color-1: #0a0a0a;
+  --color-2: #6decaf;
+  --color-3: #357ded;
+  --color-4: #5e239d;
+  --color-5: #f61067;
+  --svh: 1vh;
+  --vw: 1vw;
+  --dvh: 1dvh;
+  --lvh: 1lvh;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  background: #0a0a0a;
+  color: #ededed;
+}
+
+::selection {
+  background-color: #000;
+  color: #fff;
+  text-shadow: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Define a transition duration during page visits */
+html.is-changing .transition-fade {
+  transition: opacity 0.25s;
+  opacity: 1;
+}
+
+/* Define the styles for the unloaded pages */
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+html[data-scroll-orientation='horizontal'] body {
+  width: fit-content;
+}
+
+html[data-scroll-orientation='horizontal'] main {
+  display: flex;
+}
+
+.o-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.c-scroll_offset {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.c-scroll_offset:before,
+.c-scroll_offset:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+}
+
+html[data-scroll-orientation='vertical'] .c-scroll_offset:before,
+html[data-scroll-orientation='vertical'] .c-scroll_offset:after {
+  width: 100%;
+  height: 1px;
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_offset:before,
+html[data-scroll-orientation='horizontal'] .c-scroll_offset:after {
+  width: 1px;
+  height: 100%;
+}
+
+.c-scroll_offset:before {
+  background-color: rgb(217, 66, 66);
+}
+
+html[data-scroll-orientation='vertical'] .c-scroll_offset:before {
+  bottom: var(--offset-start);
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_offset:before {
+  right: var(--offset-start);
+}
+
+.c-scroll_offset:after {
+  background-color: rgb(74, 166, 215);
+}
+
+html[data-scroll-orientation='vertical'] .c-scroll_offset:after {
+  top: var(--offset-end);
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_offset:after {
+  left: var(--offset-end);
+}
+
+.c-scroll_section {
+  width: 100%;
+  background-color: var(--color-1);
+}
+
+.c-scroll_section.-full {
+  height: calc(100 * var(--svh));
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_section.-full {
+  width: 100vw;
+  flex-shrink: 0;
+}
+
+.c-scroll_section.-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-scroll_section.-row {
+  flex-direction: row;
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_section.-row {
+  flex-direction: column;
+}
+
+.c-scroll_box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 20vw;
+  height: 20vw;
+  max-width: 300px;
+  max-height: 300px;
+  overflow: hidden;
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll_box {
+  width: 24vh;
+  height: 24vh;
+}
+
+.c-scroll_box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-scroll-opacity {
+  opacity: 1 !important;
+  transition: opacity 0.75s ease;
+}
+
+.c-scroll-rotate {
+  transform: rotate(2turn) !important;
+  transition: transform 0.75s ease;
+}
+
+.c-scroll-direction {
+  transition: transform 0.3s ease;
+}
+
+html[data-scroll-orientation='vertical'] .c-scroll-direction {
+  transform: scaleY(var(--scroll-direction));
+}
+
+html[data-scroll-orientation='horizontal'] .c-scroll-direction {
+  transform: scaleX(var(--scroll-direction)) rotate(-90deg);
+}
+
+.c-scroll-toggler {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  background-color: grey;
+  padding: 0.5em;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  z-index: 1000;
+}

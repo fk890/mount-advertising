@@ -1,0 +1,37 @@
+/* Consolidated enhanced styles - loaded after critical content */
+
+/* Additional performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Optimize font rendering */
+body {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize image loading */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Preload key assets */
+.product-card-image {
+  will-change: transform;
+  contain: layout style paint;
+}

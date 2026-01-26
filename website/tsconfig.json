@@ -12,7 +12,12 @@
     "baseUrl": "./src",
     "paths": {
       "~/public/*": ["../public/*"],
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "@/shop-components/*": ["./shop-components/*"],
+      "@/shop-types/*": ["./shop-types/*"],
+      "@/shop-utils/*": ["./shop-utils/*"],
+      "@/shop-styles/*": ["./shop-styles/*"],
+      "@/shop-hooks/*": ["./shop-hooks/*"]
     }
   },
   "include": ["src", "next-env.d.ts", ".next/types/**/*.ts"]
