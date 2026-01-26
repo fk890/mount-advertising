@@ -1,6 +1,6 @@
 "use client";
 
-import * as Scrollytelling from "@bsmnt/scrollytelling";
+import * as Scrollytelling from "~/lib/scrollytelling-fallback";
 
 import s from "./hero.module.scss";
 import Link from "next/link";

@@ -1,4 +1,4 @@
-import * as Scrollytelling from "@bsmnt/scrollytelling";
+import * as Scrollytelling from "~/lib/scrollytelling-fallback";
 import React, { useMemo } from "react";
 import { Float, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
@@ -135,7 +135,7 @@ export const CapsModel = () => {
               progress: 1,
               ease: "power2.inOut",
               /* We pass current target idx by params */
-              onUpdate: (idx) => {
+              onUpdate: (idx: number) => {
                 handleUpdate(idx);
               },
             },

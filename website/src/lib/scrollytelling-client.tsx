@@ -1,3 +1,3 @@
 "use client";
 
-export * from "@bsmnt/scrollytelling";
+export * from "./scrollytelling-fallback";
