@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 
 type RootProps = {
   children: React.ReactNode;
@@ -39,7 +39,20 @@ type WaypointProps = {
   [key: string]: unknown;
 };
 
-export const Root = ({ children }: RootProps) => <>{children}</>;
+// Scrollytelling context for useScrollytelling hook
+const ScrollytellingContext = createContext<{
+  timeline: { scrollTrigger?: { progress: number } } | null;
+}>({ timeline: null });
+
+export const useScrollytelling = () => {
+  return useContext(ScrollytellingContext);
+};
+
+export const Root = ({ children }: RootProps) => (
+  <ScrollytellingContext.Provider value={{ timeline: { scrollTrigger: { progress: 0 } } }}>
+    {children}
+  </ScrollytellingContext.Provider>
+);
 
 export const Pin = ({ children, pinSpacerClassName }: PinProps) => (
   <div className={pinSpacerClassName}>{children}</div>
