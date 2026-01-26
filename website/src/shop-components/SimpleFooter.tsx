@@ -25,6 +25,7 @@ export function SimpleFooter() {
               <a href="/shop" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Products</a>
               <a href="/shop/faq" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">FAQ</a>
               <a href="/shop/track-order" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Track Order</a>
+              <a href="/shop/contact" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Contact Us</a>
             </div>
           </div>
 
@@ -36,6 +37,8 @@ export function SimpleFooter() {
               <p className="text-gray-600 text-sm"><strong>3-day return policy</strong></p>
               <p className="text-gray-600 text-sm">Orders acceptable for return within 3 days of receiving</p>
               <p className="text-gray-600 text-sm">Express delivery available</p>
+              <a href="/shop/shipping-policy" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Shipping Policy</a>
+              <a href="/shop/cancellations-and-refunds" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Cancellations & Refunds</a>
             </div>
           </div>
 
@@ -47,6 +50,7 @@ export function SimpleFooter() {
               <p className="text-gray-600 text-sm">Quality Guarantee</p>
               <p className="text-gray-600 text-sm">Secure Payment</p>
               <a href="/shop/support" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Help Center</a>
+              <a href="/shop/terms-and-conditions" className="block text-gray-600 hover:text-gray-900 text-sm transition-colors">Terms & Conditions</a>
             </div>
           </div>        </div>        {/* Bottom Section */}
         <div className="mt-8 pt-8 border-t border-gray-200 text-center">
