@@ -1,6 +1,6 @@
 "use client";
 
-import * as Scrollytelling from "~/lib/scrollytelling-fallback";
+import * as Scrollytelling from "~/lib/scrollytelling-client";
 
 import s from "./falling-caps.module.scss";
 import { CapsModel } from "./caps";

@@ -1,3 +1,4 @@
 "use client";
 
-export * from "./scrollytelling-fallback";
+// Re-export from the actual scrollytelling package which is built locally
+export * from "@bsmnt/scrollytelling";
