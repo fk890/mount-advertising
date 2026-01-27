@@ -58,8 +58,9 @@ export async function POST(req: NextRequest) {
     
     let fileFound = false;
     let validFileFound = false;
-    // Process each file in the form data
-    for (const [key, value] of formData.entries()) {
+    // Process each file in the form data without relying on iterator helpers (keeps target safe)
+    const entries = Array.from(formData.entries());
+    for (const [key, value] of entries) {
       if (value instanceof File) {
         fileFound = true;
         const file = value as UploadedFile;

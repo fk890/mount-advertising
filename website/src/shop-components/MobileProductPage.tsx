@@ -44,6 +44,10 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
   const [isZoomed, setIsZoomed] = useState(false)
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 })
 
+  // Safe image access with fallback
+  const currentImage = product.images[currentImageIndex] ?? product.images[0] ?? '/images/world.svg'
+  const firstImage = product.images[0] ?? '/images/world.svg'
+
   useEffect(() => {
     setIsInWishlist(getWishlist().some((item: string) => item === product.id))
   }, [product.id])
@@ -52,7 +56,7 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
       id: String(product.id),
       name: product.name,
       price: product.price,
-      image: product.images[0],
+      image: firstImage,
       quantity: 1
     })
     setShowAddToCartModal(true)
@@ -77,15 +81,19 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    if (!touch) return
     setTouchStart({
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY
+      x: touch.clientX,
+      y: touch.clientY
     })
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const deltaX = touchStart.x - e.changedTouches[0].clientX
-    const deltaY = Math.abs(touchStart.y - e.changedTouches[0].clientY)
+    const touch = e.changedTouches[0]
+    if (!touch) return
+    const deltaX = touchStart.x - touch.clientX
+    const deltaY = Math.abs(touchStart.y - touch.clientY)
     
     // Only trigger swipe if horizontal movement is greater than vertical
     if (Math.abs(deltaX) > 50 && deltaY < 100) {
@@ -209,7 +217,7 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
           onTouchEnd={handleTouchEnd}
         >
           <Image
-            src={product.images[currentImageIndex]}
+            src={currentImage}
             alt={product.name}
             fill
             className="w-full h-full object-cover"
@@ -338,7 +346,7 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
         isOpen={showAddToCartModal}
         onClose={() => setShowAddToCartModal(false)}
         productName={product.name}
-        productImage={product.images[0]}
+        productImage={firstImage}
         productPrice={product.priceString || (typeof product.price === 'string' ? product.price : `$${product.price}`)}
       />
 
@@ -362,7 +370,7 @@ export default function MobileProductPage({ product }: MobileProductPageProps) {
             >
               <div className="relative max-w-full max-h-full">
                 <Image
-                  src={product.images[currentImageIndex]}
+                  src={currentImage}
                   alt={product.name}
                   width={400}
                   height={400}

@@ -63,12 +63,14 @@ function OrderHistoryPage() {
       state: 'NY',
       zipCode: '10001'
     };
+
+    const formatDate = (date: Date): string => date.toISOString().split('T')[0] ?? '';
     
     return [
       {
         id: 'order-1',
         orderNumber: 'ZVY-10458',
-        date: today.toISOString().split('T')[0],
+        date: formatDate(today),
         status: 'processing' as const,
         total: 599.00,
         items: [
@@ -91,7 +93,7 @@ function OrderHistoryPage() {
       {
         id: 'order-2',
         orderNumber: 'ZVY-10432',
-        date: oneWeekAgo.toISOString().split('T')[0],
+        date: formatDate(oneWeekAgo),
         status: 'shipped' as const,
         total: 848.00,
         items: [
@@ -122,7 +124,7 @@ function OrderHistoryPage() {
       {
         id: 'order-3',
         orderNumber: 'ZVY-10401',
-        date: twoWeeksAgo.toISOString().split('T')[0],
+        date: formatDate(twoWeeksAgo),
         status: 'delivered' as const,
         total: 799.00,
         items: [

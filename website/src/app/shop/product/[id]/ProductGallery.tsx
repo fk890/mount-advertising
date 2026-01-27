@@ -37,6 +37,8 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
     );
   }, [images.length]);
 
+  const currentImage = images[selectedImageIndex] ?? images[0] ?? '/images/world.svg';
+
   return (
     <>
       <div className="lg:col-span-1">        {/* Main Product Image */}
@@ -44,7 +46,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
           className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 mb-4 group cursor-zoom-in"
           onClick={() => handleImageClick(selectedImageIndex)}
         >          <Image
-          src={images[selectedImageIndex]}
+          src={currentImage}
           alt={`${product.name} - High-quality advertising product from Mount Advertising, view ${selectedImageIndex + 1} of ${images.length}`}
             fill
             className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
@@ -112,7 +114,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
           {/* Image Container */}
           <div className="relative w-full h-full max-w-4xl max-h-[90vh] flex items-center justify-center">
             <Image
-              src={images[selectedImageIndex]}
+              src={currentImage}
               alt={`${product.name} - High-quality advertising product from Mount Advertising, view ${selectedImageIndex + 1} of ${images.length}`}
               fill
               className="object-contain object-center"

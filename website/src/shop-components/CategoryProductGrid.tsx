@@ -1,6 +1,6 @@
 "use client";
 
-import ShowcaseProductCard from '@/components/ShowcaseProductCard';
+import ShowcaseProductCard from '@/shop-components/ShowcaseProductCard';
 import { Product } from '@/shop-types/Product';
 
 interface CategoryProductGridProps {

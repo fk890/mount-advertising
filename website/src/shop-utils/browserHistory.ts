@@ -44,7 +44,7 @@ export function addToBrowsingHistory(product: Product | BrowserHistoryItem) {
       image: typeof product.image === 'string'
         ? product.image
         : ('images' in product && Array.isArray(product.images) && product.images.length > 0)
-          ? product.images[0]
+          ? (product.images[0] ?? '/images/world.svg')
           : '/images/world.svg',
       price: typeof product.price === 'string' ? parseFloat(product.price) : product.price,
       collection: product.collection,

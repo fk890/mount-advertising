@@ -214,9 +214,10 @@ export default function ProductForm({ initialData = {}, mode = 'create' }: Produ
     const newImages = [...formData.images];
     const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
     
-    // Swap the images
-    [newImages[currentIndex], newImages[targetIndex]] = 
-    [newImages[targetIndex], newImages[currentIndex]];
+    // Swap the images safely
+    const temp = newImages[currentIndex];
+    newImages[currentIndex] = newImages[targetIndex] ?? '';
+    newImages[targetIndex] = temp ?? '';
     
     setFormData(prev => ({
       ...prev,

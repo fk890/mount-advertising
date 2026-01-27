@@ -27,7 +27,10 @@ export function addToCart(item: CartItem) {
   
   if (existingItemIndex !== -1) {
     // Update quantity if item already exists with same options
-    cart[existingItemIndex].quantity += item.quantity;
+    const existingItem = cart[existingItemIndex];
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    }
   } else {
     // Add new item
     cart.push(item);
@@ -49,7 +52,10 @@ export function updateCartItem(itemId: string, updates: Partial<CartItem>) {
   const itemIndex = cart.findIndex(item => item.id === itemId);
   
   if (itemIndex !== -1) {
-    cart[itemIndex] = { ...cart[itemIndex], ...updates };
+    const existingItem = cart[itemIndex];
+    if (existingItem) {
+      cart[itemIndex] = { ...existingItem, ...updates } as CartItem;
+    }
     localStorage.setItem('cart', JSON.stringify(cart));
     
     // Dispatch events

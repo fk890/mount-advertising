@@ -121,7 +121,7 @@ export default function LEDBoards() {
       id: `custom-led-board-${Date.now()}`,
       name: `Custom LED Board: ${width}" x ${height}"`,
       price: calculatePrice(),
-      image: uploadedImage || '/shop/led-board-preview.webp',
+      image: uploadedImage || '/shop/led-1.webp',
       quantity: 1,
       customization: {
         text: customText,
