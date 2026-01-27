@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Eye, CheckCircle, Clock, DollarSign, ShoppingBag, AlertTriangle, ExternalLink } from 'lucide-react';
 
 interface Customization {
@@ -517,11 +518,14 @@ export function AdminOrdersManagement() {
                               View Customer Design
                             </a>
                             <div className="mt-2">
-                              <img 
+                              <Image 
                                 src={item.custom_design_url} 
                                 alt="Customer design"
+                                width={400}
+                                height={400}
                                 className="max-w-xs rounded border"
                                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                unoptimized
                               />
                             </div>
                           </div>

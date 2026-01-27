@@ -121,7 +121,7 @@ export default function NeonSignage() {
 
   return (
     <>
-      {/* Google Fonts */}
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link 
         href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Sacramento&family=Great+Vibes&family=Bebas+Neue&family=Oswald:wght@500&family=Allura&family=Bangers&family=Playfair+Display:wght@600&family=Satisfy&family=Cormorant+Garamond:wght@500&family=Pacifico&family=Orbitron:wght@700&family=Caveat:wght@600&family=Indie+Flower&family=Italiana&display=swap" 
         rel="stylesheet" 
@@ -470,7 +470,7 @@ export default function NeonSignage() {
         <div id="product-details" style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 24px' }}>
           <h3 style={{ color: '#00ff00', fontSize: '28px', fontWeight: 'bold', marginBottom: '16px' }}>About Your Neon Sign:</h3>
           <p style={{ color: '#fff', fontSize: '18px', lineHeight: 1.6, marginBottom: '40px', maxWidth: '900px' }}>
-            Mount Advertising's neon signs are handcrafted with advanced 2nd gen LED on high-quality 6MM transparent acrylic. 
+            Mount Advertising&apos;s neon signs are handcrafted with advanced 2nd gen LED on high-quality 6MM transparent acrylic. 
             Energy-efficient, durable, and easy to install–perfect for any space!
           </p>
 

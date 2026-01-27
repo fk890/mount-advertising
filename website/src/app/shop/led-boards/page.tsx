@@ -154,7 +154,7 @@ export default function LEDBoards() {
 
   return (
     <>
-      {/* Google Fonts */}
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link 
         href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Sacramento&family=Great+Vibes&family=Bebas+Neue&family=Oswald:wght@500&family=Allura&family=Bangers&family=Playfair+Display:wght@600&family=Satisfy&family=Cormorant+Garamond:wght@500&family=Pacifico&family=Orbitron:wght@700&family=Caveat:wght@600&family=Indie+Flower&family=Italiana&display=swap" 
         rel="stylesheet" 
@@ -204,15 +204,18 @@ export default function LEDBoards() {
                 }}>
                   {uploadedImage ? (
                     <div style={{ position: 'relative', maxWidth: '100%', maxHeight: '250px' }}>
-                      <img 
+                      <Image 
                         src={uploadedImage} 
                         alt="Uploaded design" 
+                        width={800}
+                        height={600}
                         style={{ 
                           maxWidth: '100%', 
                           maxHeight: '250px', 
                           objectFit: 'contain',
                           borderRadius: '8px',
                         }} 
+                        unoptimized
                       />
                       <button
                         onClick={removeUploadedImage}

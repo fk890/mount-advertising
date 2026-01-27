@@ -47,6 +47,7 @@ function OrderHistoryPage() {
     }
 
     fetchOrders()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const generateMockOrders = (userData: any): Order[] => {
     const today = new Date();

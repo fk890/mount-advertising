@@ -66,10 +66,12 @@ export const Stagger = ({ children }: StaggerProps) => <>{children}</>;
 
 export const Waypoint = (_props: WaypointProps) => null;
 
-export default {
+const scrollytellingExports = {
   Root,
   Pin,
   Animation,
   Stagger,
   Waypoint,
 };
+
+export default scrollytellingExports;
