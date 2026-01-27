@@ -251,7 +251,7 @@ export function SlideCart({ isOpen, onClose }: SlideCartProps) {
             <div className={styles.promoBanner}>
               <span style={{ color: '#22c55e', fontSize: 18 }}>🏷️</span>
               <p className={styles.promoText}>
-                Use Code <span className="font-bold">'BRIGHT25'</span> to get Extra 25% Off at Checkout
+                Use Code <span className="font-bold">&apos;BRIGHT25&apos;</span> to get Extra 25% Off at Checkout
               </p>
             </div>
 

@@ -450,7 +450,7 @@ export default function NeonSignage() {
           <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '48px' }}>
               <a href="#product-details" style={{ color: '#fff', textDecoration: 'none', padding: '16px 0', fontSize: '15px', fontWeight: 500 }}>Product Details</a>
-              <a href="#whats-in-box" style={{ color: '#fff', textDecoration: 'none', padding: '16px 0', fontSize: '15px', fontWeight: 500 }}>What's in the box?</a>
+              <a href="#whats-in-box" style={{ color: '#fff', textDecoration: 'none', padding: '16px 0', fontSize: '15px', fontWeight: 500 }}>What&apos;s in the box?</a>
               <a href="#how-to-install" style={{ color: '#fff', textDecoration: 'none', padding: '16px 0', fontSize: '15px', fontWeight: 500 }}>How to install?</a>
               <a href="#customise" style={{ 
                 color: '#00ff00', 
@@ -509,7 +509,7 @@ export default function NeonSignage() {
               <p style={{ color: '#9CA3AF', fontSize: '16px', lineHeight: 1.7, marginBottom: '20px' }}>
                 Our revolutionary 2nd Gen LED Neon is twice as bright, 80% more energy-efficient, and built to 
                 outlast the rest. Plus, with adjustable brightness controls, and the option for waterproof durability, 
-                this is the ultimate neon upgrade you've been waiting for!
+                this is the ultimate neon upgrade you&apos;ve been waiting for!
               </p>
               <p style={{ color: '#9CA3AF', fontSize: '16px', fontStyle: 'italic' }}>
                 Say goodbye to dull, outdated neon–this is the future!
@@ -629,7 +629,7 @@ export default function NeonSignage() {
         {/* How to Install Section */}
         <div id="how-to-install" style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 24px' }}>
           <h3 style={{ color: '#00ff00', fontSize: '28px', fontWeight: 'bold', marginBottom: '24px' }}>
-            Here's how you can install our neon signs on your wall:
+            Here&apos;s how you can install our neon signs on your wall:
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
             {[

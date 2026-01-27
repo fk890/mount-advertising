@@ -254,7 +254,7 @@ export default function LEDBoards() {
                   fontSize: '12px',
                   color: '#888',
                 }}>
-                  {width}" × {height}"
+                  {width}&quot; × {height}&quot;
                 </div>
               </div>
 
@@ -554,7 +554,7 @@ export default function LEDBoards() {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ color: '#9CA3AF', fontSize: '14px' }}>Board Size:</span>
-                  <span style={{ color: '#fff', fontSize: '14px' }}>{width}" × {height}" ({((parseFloat(width) * parseFloat(height)) / 144).toFixed(2)} sq.ft)</span>
+                  <span style={{ color: '#fff', fontSize: '14px' }}>{width}&quot; × {height}&quot; ({((parseFloat(width) * parseFloat(height)) / 144).toFixed(2)} sq.ft)</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ color: '#9CA3AF', fontSize: '14px' }}>Board Type:</span>

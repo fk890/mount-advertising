@@ -236,7 +236,7 @@ function OrderHistoryPage() {
           <div className="bg-white rounded-lg shadow-sm p-12 text-center">
             <ShoppingBag className="h-16 w-16 mx-auto text-gray-300 mb-4" />
             <h2 className="text-2xl font-medium text-gray-900 mb-2">No orders yet</h2>
-            <p className="text-gray-600 mb-8">You haven't placed any orders yet.</p>
+            <p className="text-gray-600 mb-8">You haven&apos;t placed any orders yet.</p>
             <Link
               href="/"
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800"

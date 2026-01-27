@@ -114,7 +114,7 @@ function SearchContent() {
 
           {query && (
             <p className={styles.queryLabel}>
-              Showing results for: <span className={styles.queryHighlight}>"{query}"</span>
+              Showing results for: <span className={styles.queryHighlight}>&quot;{query}&quot;</span>
             </p>
           )}
         </div>
@@ -135,8 +135,8 @@ function SearchContent() {
           </div>
         ) : results.length === 0 ? (
           <div className={styles.message}>
-            <p className={styles.messageText} style={{ marginBottom: 12 }}>No products found for "{query}"</p>
-            <p className={styles.messageText} style={{ color: '#6b7280', fontSize: 14 }}>Try searching for "neon", "LED", "cafe", or "banner"</p>
+            <p className={styles.messageText} style={{ marginBottom: 12 }}>No products found for &quot;{query}&quot;</p>
+            <p className={styles.messageText} style={{ color: '#6b7280', fontSize: 14 }}>Try searching for &quot;neon&quot;, &quot;LED&quot;, &quot;cafe&quot;, or &quot;banner&quot;</p>
           </div>
         ) : (
           <>

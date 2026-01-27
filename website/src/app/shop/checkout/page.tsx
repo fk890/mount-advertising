@@ -708,7 +708,7 @@ function CheckoutPage() {
               
               <div className="text-center mt-4">
                 <p className="text-xs text-gray-500 font-serif">
-                  🔒 Powered by Razorpay - India's trusted payment gateway<br/>
+                  🔒 Powered by Razorpay - India&apos;s trusted payment gateway<br/>
                   Your payment information is encrypted and secure
                 </p>
               </div>
