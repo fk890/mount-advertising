@@ -13,6 +13,7 @@
     "@bsmnt/scrollytelling": "file:../scrollytelling",
     "@react-three/drei": "^9.65.3",
     "@react-three/fiber": "^8.12.0",
+    "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.8",
     "@types/three": "^0.150.1",
     "@vercel/analytics": "^1.0.0",
