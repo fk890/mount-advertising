@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 
-// Initialize Razorpay instance
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
-
 // Generate unique order number
 const generateOrderNumber = (): string => {
   const timestamp = Date.now().toString();
@@ -16,6 +10,19 @@ const generateOrderNumber = (): string => {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      return NextResponse.json(
+        { success: false, error: 'Razorpay is not configured' },
+        { status: 500 }
+      );
+    }
+
+    // Initialize Razorpay instance
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
     const { amount, currency = 'INR', receipt, notes } = await request.json();
 
     if (!amount || amount < 1) {

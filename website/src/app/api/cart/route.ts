@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-// Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabaseAdmin, isSupabaseConfigured } from '@/shop-utils/supabase/admin';
 
 // GET - Get user's cart
 export async function GET(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const client = supabaseAdmin;
+
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
     
@@ -19,7 +23,7 @@ export async function GET(request: NextRequest) {
       );
     }
     
-    const { data: cartItems, error } = await supabase
+    const { data: cartItems, error } = await client
       .from('cart_items')
       .select(`
         *,
@@ -58,6 +62,15 @@ export async function GET(request: NextRequest) {
 // POST - Add item to cart
 export async function POST(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const client = supabaseAdmin;
+
     const { userId, productId, quantity = 1, size, color } = await request.json();
     
     if (!userId || !productId) {
@@ -68,7 +81,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Check if item already exists in cart
-    const { data: existingItem } = await supabase
+    const { data: existingItem } = await client
       .from('cart_items')
       .select('*')
       .eq('user_id', userId)
@@ -79,7 +92,7 @@ export async function POST(request: NextRequest) {
       
     if (existingItem) {
       // Update quantity
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('cart_items')
         .update({ 
           quantity: existingItem.quantity + quantity,
@@ -104,7 +117,7 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // Add new item
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('cart_items')
         .insert({
           user_id: userId,
@@ -143,6 +156,15 @@ export async function POST(request: NextRequest) {
 // PUT - Update cart item
 export async function PUT(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const client = supabaseAdmin;
+
     const { cartItemId, quantity } = await request.json();
     
     if (!cartItemId || quantity === undefined) {
@@ -154,7 +176,7 @@ export async function PUT(request: NextRequest) {
     
     if (quantity <= 0) {
       // Delete item if quantity is 0 or less
-      const { error } = await supabase
+      const { error } = await client
         .from('cart_items')
         .delete()
         .eq('id', cartItemId);
@@ -173,7 +195,7 @@ export async function PUT(request: NextRequest) {
       });
     } else {
       // Update quantity
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('cart_items')
         .update({ 
           quantity,
@@ -210,6 +232,15 @@ export async function PUT(request: NextRequest) {
 // DELETE - Remove item from cart
 export async function DELETE(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
+    
+    const client = supabaseAdmin;
+    
     const { searchParams } = new URL(request.url);
     const cartItemId = searchParams.get('cartItemId');
     
@@ -220,7 +251,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
     
-    const { error } = await supabase
+    const { error } = await client
       .from('cart_items')
       .delete()
       .eq('id', cartItemId);

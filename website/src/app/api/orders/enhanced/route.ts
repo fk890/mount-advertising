@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { createClient } from '@supabase/supabase-js';
-
-// Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabaseAdmin, isSupabaseConfigured } from '@/shop-utils/supabase/admin';
 
 interface OrderItem {
   id: string;
@@ -68,7 +63,11 @@ const createTransporter = () => {
 const saveOrderToSupabase = async (orderData: OrderData, orderNumber: string) => {
   try {
     // Insert main order
-    const { data: orderResult, error: orderError } = await supabase
+    if (!supabaseAdmin) {
+      throw new Error('Supabase is not configured.');
+    }
+
+    const { data: orderResult, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert({
         order_number: orderNumber,
@@ -118,7 +117,7 @@ const saveOrderToSupabase = async (orderData: OrderData, orderNumber: string) =>
       product_category: item.category
     }));
 
-    const { error: itemsError } = await supabase
+    const { error: itemsError } = await supabaseAdmin
       .from('order_items')
       .insert(orderItems);
 
@@ -289,6 +288,13 @@ const sendOrderConfirmationEmail = async (orderData: OrderData, orderNumber: str
 
 export async function POST(request: NextRequest) {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, message: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
+
     const orderData: OrderData = await request.json();
 
     // Validate required fields

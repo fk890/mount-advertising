@@ -1,16 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin, isSupabaseConfigured } from '@/shop-utils/supabase/admin';
 
 // Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+// const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+// const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function GET() {
   try {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Supabase is not configured' },
+        { status: 500 }
+      );
+    }
 
     // Fetch orders with their items using Supabase
-    const { data: orders, error: ordersError } = await supabase
+    const { data: orders, error: ordersError } = await supabaseAdmin
       .from('orders')
       .select(`
         *,
@@ -46,7 +52,7 @@ export async function GET() {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     
-    const { data: statsData, error: statsError } = await supabase
+    const { data: statsData, error: statsError } = await supabaseAdmin
       .from('orders')
       .select('id, total_amount, order_status, fulfillment_status')
       .gte('created_at', thirtyDaysAgo.toISOString());
@@ -103,7 +109,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Check if Supabase is configured
-    if (!supabase) {
+    if (!isSupabaseConfigured || !supabaseAdmin) {
       return NextResponse.json({
         success: false,
         error: "Database not configured. Please set up Supabase environment variables."
@@ -133,7 +139,7 @@ export async function PUT(request: NextRequest) {
       }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('orders')
       .update(updateData)
       .eq('id', orderId)
