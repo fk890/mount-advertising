@@ -31,6 +31,42 @@ const fallbackProducts: Array<{
       Warranty: '2 Years',
       Mounting: 'Wall Mount + Hanging Kit'
     }
+  },
+  {
+    id: 'cafe-open-sign',
+    name: 'Open / Close Cafe Sign',
+    description: 'Double-sided open/close neon sign with warm white glow. Perfect for cafes and bakeries that want clear storefront visibility.',
+    price: 4299,
+    images: ['/shop/Cafe_LED_4_1.webp'],
+    category: 'cafe',
+    collection: 'cafe',
+    rating: 4.8,
+    reviews: 87,
+    stock: 18,
+    details: {
+      Material: 'LED Neon Flex + Acrylic',
+      Power: 'DC 12V',
+      Warranty: '2 Years',
+      Mounting: 'Wall Mount + Hanging Kit'
+    }
+  },
+  {
+    id: 'cafe-coffee-steam',
+    name: 'Coffee Cup Steam Neon',
+    description: 'Minimal coffee cup with steam neon art sized for counters or window displays. Soft amber and white tones for cozy vibes.',
+    price: 3799,
+    images: ['/shop/Cafe_LED_4_1.webp'],
+    category: 'cafe',
+    collection: 'cafe',
+    rating: 4.7,
+    reviews: 64,
+    stock: 22,
+    details: {
+      Material: 'LED Neon Flex + Acrylic',
+      Power: 'DC 12V',
+      Warranty: '2 Years',
+      Mounting: 'Wall Mount + Hanging Kit'
+    }
   }
 ];
 
@@ -101,6 +137,11 @@ export async function GET(request: NextRequest) {
         const { data, error } = await query.eq('id', id).single();
         if (error) {
           if (error.code === 'PGRST116') {
+            // Fallback to local products when Supabase has no matching record
+            const fallback = fallbackProducts.find((item) => item.id === id);
+            if (fallback) {
+              return NextResponse.json({ success: true, products: [fallback], source: 'mock' });
+            }
             return NextResponse.json({ success: false, error: 'Product not found', products: [] }, { status: 404 });
           }
           throw error;
@@ -122,12 +163,26 @@ export async function GET(request: NextRequest) {
         throw error;
       }
 
+      // If Supabase is empty for the requested slice/category, serve local fallbacks so pages are not blank
+      const fallbackWhenEmpty = data.length === 0
+        ? (normalizedCategory
+            ? fallbackProducts.filter((item) => {
+                const categoryValue = item.category?.toLowerCase() || '';
+                const collectionValue = item.collection?.toLowerCase() || '';
+                return categoryValue === normalizedCategory || collectionValue === normalizedCategory;
+              })
+            : fallbackProducts)
+        : [];
+
+      const productsToReturn = data.length > 0 ? data : fallbackWhenEmpty;
+
       return NextResponse.json({ 
         success: true, 
-        products: data, 
-        total: totalCount || data.length,
+        products: productsToReturn, 
+        total: totalCount || productsToReturn.length,
         page: pageNum,
-        totalPages: Math.ceil((totalCount || data.length) / limitNum)
+        totalPages: Math.ceil((totalCount || productsToReturn.length) / limitNum),
+        source: data.length > 0 ? 'supabase' : 'mock'
       });
 
     } catch (supabaseError) {

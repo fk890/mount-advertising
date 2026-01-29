@@ -60,6 +60,54 @@ const fallbackProducts: Product[] = [
       Warranty: '2 Years',
       Mounting: 'Wall Mount + Hanging Kit'
     }
+  },
+  {
+    id: 'cafe-open-sign',
+    name: 'Open / Close Cafe Sign',
+    description: 'Double-sided open/close neon sign with warm white glow. Perfect for cafes and bakeries that want clear storefront visibility.',
+    price: 4299,
+    category: 'cafe',
+    collection: 'cafe',
+    images: ['/shop/Cafe_LED_4_1.webp'],
+    stock: 18,
+    rating: 4.8,
+    reviews: 87,
+    createdAt: new Date().toISOString(),
+    details: {
+      material: 'LED Neon Flex + Acrylic',
+      dimensions: '18" x 10"',
+      weight: 'N/A',
+    },
+    specifications: {
+      Material: 'LED Neon Flex + Acrylic',
+      Power: 'DC 12V',
+      Warranty: '2 Years',
+      Mounting: 'Wall Mount + Hanging Kit'
+    }
+  },
+  {
+    id: 'cafe-coffee-steam',
+    name: 'Coffee Cup Steam Neon',
+    description: 'Minimal coffee cup with steam neon art sized for counters or window displays. Soft amber and white tones for cozy vibes.',
+    price: 3799,
+    category: 'cafe',
+    collection: 'cafe',
+    images: ['/shop/Cafe_LED_4_1.webp'],
+    stock: 22,
+    rating: 4.7,
+    reviews: 64,
+    createdAt: new Date().toISOString(),
+    details: {
+      material: 'LED Neon Flex + Acrylic',
+      dimensions: '16" x 12"',
+      weight: 'N/A',
+    },
+    specifications: {
+      Material: 'LED Neon Flex + Acrylic',
+      Power: 'DC 12V',
+      Warranty: '2 Years',
+      Mounting: 'Wall Mount + Hanging Kit'
+    }
   }
 ];
 

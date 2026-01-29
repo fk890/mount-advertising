@@ -200,7 +200,11 @@ export function Navbar() {
 
             {/* Right: Icons & Auth */}
             <div className="nav-right space-x-1 sm:space-x-2 lg:space-x-4">
-              <Link href="/shop/search" className="p-2 neon-link hidden sm:block">
+              {/* Mobile search toggle */}
+              <Link href="/shop/search" className="p-2 neon-link sm:hidden" aria-label="Search products">
+                <Search className="h-5 w-5" />
+              </Link>
+              <Link href="/shop/search" className="p-2 neon-link hidden sm:block" aria-label="Search products">
                 <Search className="h-5 w-5 lg:h-6 lg:w-6" />
               </Link>
               <button 
@@ -313,6 +317,9 @@ export function Navbar() {
                           <ChevronRight className="h-5 w-5 text-gray-500" />
                         </div>
                         <div className="mt-3 ml-4 space-y-3">
+                          <Link href="/shop" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Shop All</Link>
+                          <Link href="/shop/cafe" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Cafe</Link>
+                          <Link href="/shop/gaming" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Gaming</Link>
                           <Link href="/shop/neon-signage" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Neon Signage</Link>
                           <Link href="/shop/led-boards" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>LED Boards</Link>
                           <Link href="/shop/banners" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Banners</Link>
@@ -326,6 +333,18 @@ export function Navbar() {
                           <span className="text-lg font-medium neon-link">Account</span>
                         </Link>
                       )}
+
+                      {/* Quick actions for mobile */}
+                      <div className="py-4 border-b border-gray-800 space-y-3">
+                        <Link href="/shop/search" className="flex items-center justify-between" onClick={() => setIsMenuOpen(false)}>
+                          <span className="text-base neon-link">Search products</span>
+                          <Search className="h-5 w-5 text-gray-400" />
+                        </Link>
+                        <Link href="/shop/orders" className="flex items-center justify-between" onClick={() => setIsMenuOpen(false)}>
+                          <span className="text-base neon-link">Track orders</span>
+                          <Package className="h-5 w-5 text-gray-400" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
 
