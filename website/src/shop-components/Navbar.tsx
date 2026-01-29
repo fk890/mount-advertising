@@ -200,11 +200,8 @@ export function Navbar() {
 
             {/* Right: Icons & Auth */}
             <div className="nav-right space-x-1 sm:space-x-2 lg:space-x-4">
-              {/* Mobile search toggle */}
-              <Link href="/shop/search" className="p-2 neon-link sm:hidden" aria-label="Search products">
-                <Search className="h-5 w-5" />
-              </Link>
-              <Link href="/shop/search" className="p-2 neon-link hidden sm:block" aria-label="Search products">
+              {/* Single search trigger responsive across breakpoints */}
+              <Link href="/shop/search" className="p-2 neon-link" aria-label="Search products">
                 <Search className="h-5 w-5 lg:h-6 lg:w-6" />
               </Link>
               <button 

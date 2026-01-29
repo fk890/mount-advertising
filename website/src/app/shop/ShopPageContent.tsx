@@ -31,6 +31,7 @@ export default function ShopPageContent() {
         if (!response.ok) return
         const data = await response.json()
         const products: ApiProduct[] = data.products || []
+        // De-dupe and prefer one cafe + one gaming item
         const filtered = products.filter((product) => {
           const category = (product.category || '').toLowerCase().trim()
           const collection = (product.collection || '').toLowerCase().trim()
@@ -40,8 +41,21 @@ export default function ShopPageContent() {
           const isGaming = category === 'gaming' || collection === 'gaming' || id.startsWith('gaming-')
           return !isExcluded && (isCafe || isGaming)
         })
-        const shuffled = filtered.sort(() => 0.5 - Math.random())
-        setRandomProducts(shuffled.slice(0, 2))
+        const unique = Array.from(new Map(filtered.map((p) => [p.id, p])).values())
+
+        const cafeItem = unique.find((p) => (p.category || '').toLowerCase().includes('cafe') || (p.collection || '').toLowerCase().includes('cafe') || p.id.toLowerCase().startsWith('cafe-'))
+        const gamingItem = unique.find((p) => (p.category || '').toLowerCase().includes('gaming') || (p.collection || '').toLowerCase().includes('gaming') || p.id.toLowerCase().startsWith('gaming-'))
+
+        const picked: ApiProduct[] = []
+        if (cafeItem) picked.push(cafeItem)
+        if (gamingItem && gamingItem.id !== cafeItem?.id) picked.push(gamingItem)
+
+        if (picked.length < 2) {
+          const remaining = unique.filter((p) => !picked.some((q) => q.id === p.id))
+          picked.push(...remaining.slice(0, 2 - picked.length))
+        }
+
+        setRandomProducts(picked.slice(0, 2))
       } catch (error) {
         console.error('Failed to load random products', error)
       }
