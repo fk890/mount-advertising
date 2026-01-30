@@ -15,21 +15,13 @@ export async function GET() {
       version: '1.0.0',
       configuration: {
         supabase: {
-          url: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-          serviceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-          anonKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-        },
-        admin: {
-          email: !!process.env.ADMIN_EMAIL,
-          password: !!process.env.ADMIN_PASSWORD
+          configured: !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
         },
         email: {
-          user: !!process.env.EMAIL_USER,
-          password: !!process.env.EMAIL_PASSWORD
+          configured: !!process.env.EMAIL_USER && !!process.env.EMAIL_PASSWORD
         },
         paypal: {
-          clientId: !!process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-          clientSecret: !!process.env.PAYPAL_CLIENT_SECRET
+          configured: !!process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID && !!process.env.PAYPAL_CLIENT_SECRET
         }
       }
     };

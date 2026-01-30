@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { SignJWT } from 'jose';
 
 export const runtime = 'nodejs';
@@ -9,13 +8,15 @@ export async function POST(req: NextRequest) {
     console.log("Admin login attempt received");
     
     // Parse the request body
-    const { email, password } = await req.json();
+    const body = await req.json();
+    const email = (body.email || '').trim().toLowerCase();
+    const password = (body.password || '').trim();
     console.log(`Login attempt with email: ${email}`);
     // Validate credentials against environment variables
     console.log("Validating admin credentials against environment variables...");
     
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminPassword = process.env.ADMIN_PASSWORD;
+    const adminEmail = (process.env.ADMIN_EMAIL || '').replace(/^["']|["']$/g, '').trim();
+    const adminPassword = (process.env.ADMIN_PASSWORD || '').replace(/^["']|["']$/g, '').trim();
     const jwtSecret = process.env.JWT_SECRET;
     
     console.log(`Environment variables check: 
@@ -33,9 +34,11 @@ export async function POST(req: NextRequest) {
     }
     
     // Validate credentials
-    const emailMatch = email === adminEmail;
+    const emailMatch = email === adminEmail.toLowerCase();
     const passwordMatch = password === adminPassword;
     console.log(`Credential validation: Email match: ${emailMatch}, Password match: ${passwordMatch}`);
+    console.log(`Received email: "${email}", Expected: "${adminEmail.toLowerCase()}"`);
+    console.log(`Password length received: ${password.length}, Expected: ${adminPassword.length}`);
     
     if (!emailMatch || !passwordMatch) {
       console.log("Invalid login credentials provided");
@@ -54,19 +57,21 @@ export async function POST(req: NextRequest) {
       .setIssuedAt()
       .setExpirationTime('8h')
       .sign(secret);
-      // Set the cookie
-    const cookiesStore = await cookies();
-    cookiesStore.set('admin-token', token, {
+    
+    // Set the cookie - using response headers for better compatibility
+    const response = NextResponse.json({ success: true });
+    
+    response.cookies.set('admin-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+      sameSite: 'lax', // Use lax for both dev and prod for better compatibility
       maxAge: 60 * 60 * 8, // 8 hours
       path: '/',
     });
     
     console.log("JWT token set in cookie successfully");
     
-    return NextResponse.json({ success: true });
+    return response;
     
   } catch (error) {
     console.error('Login error:', error);

@@ -16,7 +16,10 @@ export default function Displays() {
         if (!response.ok) throw new Error('Failed to fetch products');
         
         const data = await response.json();
-        setProducts(data.products || []);
+        // Deduplicate products by ID
+        const productsArr: Product[] = data.products || [];
+        const uniqueProducts = [...new Map(productsArr.map((p: Product) => [p.id, p])).values()] as Product[];
+        setProducts(uniqueProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {

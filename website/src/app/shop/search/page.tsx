@@ -45,7 +45,11 @@ function SearchContent() {
             p.description?.toLowerCase().includes(query.toLowerCase()) ||
             p.category?.toLowerCase().includes(query.toLowerCase())
           );
-          setResults(filtered);
+          // Deduplicate products by ID
+          const uniqueResults = Array.from(
+            new Map(filtered.map((p: any) => [p.id, p])).values()
+          );
+          setResults(uniqueResults);
         } else {
           setError("No results found.");
         }

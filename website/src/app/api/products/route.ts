@@ -174,14 +174,18 @@ export async function GET(request: NextRequest) {
             : fallbackProducts)
         : [];
 
+      // Deduplicate products by ID
       const productsToReturn = data.length > 0 ? data : fallbackWhenEmpty;
+      const uniqueProducts = Array.from(
+        new Map(productsToReturn.map((p: any) => [p.id, p])).values()
+      );
 
       return NextResponse.json({ 
         success: true, 
-        products: productsToReturn, 
-        total: totalCount || productsToReturn.length,
+        products: uniqueProducts, 
+        total: totalCount || uniqueProducts.length,
         page: pageNum,
-        totalPages: Math.ceil((totalCount || productsToReturn.length) / limitNum),
+        totalPages: Math.ceil((totalCount || uniqueProducts.length) / limitNum),
         source: data.length > 0 ? 'supabase' : 'mock'
       });
 

@@ -41,10 +41,18 @@ export default function AdminLogin() {
         // Using replace instead of push to avoid having the login page in history
         router.replace(from);
       } else {
-        setError(data.error || 'Invalid email or password');
+        // More descriptive error message
+        if (response.status === 500) {
+          setError(data.error || 'Server configuration error. Please check environment variables.');
+        } else if (response.status === 401) {
+          setError('Invalid email or password. Please try again.');
+        } else {
+          setError(data.error || 'Login failed. Please try again.');
+        }
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      console.error('Login error:', err);
+      setError('Network error. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
     }

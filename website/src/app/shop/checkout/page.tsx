@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Link from 'next/link'
 import Image from 'next/image'
-import withAuth from '@/shop-utils/withAuth';
+import { LoginModal } from '@/shop-components/LoginModal';
 
 // Inline icon components to avoid lucide-react JSX issues
 const LockIcon = () => (
@@ -70,6 +70,8 @@ function CheckoutPage() {
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<{code: string, discount: number} | null>(null);
   const [promoError, setPromoError] = useState('');
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   // Shipping form state
   const [shippingInfo, setShippingInfo] = useState({
@@ -96,6 +98,7 @@ function CheckoutPage() {
       try {
         const user = JSON.parse(storedUser);
         setCustomerEmail(user.email || '');
+        setIsLoggedIn(true);
         setShippingInfo(prev => ({
           ...prev,
           firstName: user.firstName || '',
@@ -103,7 +106,12 @@ function CheckoutPage() {
         }));
       } catch (e) {
         console.error('Error loading user data:', e);
+        // Show login modal for guests after a slight delay
+        setTimeout(() => setShowLoginModal(true), 500);
       }
+    } else {
+      // Show login suggestion modal for guests
+      setTimeout(() => setShowLoginModal(true), 500);
     }
     
     // Load promo code data
@@ -113,6 +121,25 @@ function CheckoutPage() {
         setAppliedPromo(JSON.parse(storedPromo));
       } catch (e) {
         console.error('Error loading promo data:', e);
+      }
+    }
+  }, []);
+
+  // Handle login success from modal
+  const handleLoginSuccess = useCallback(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        setCustomerEmail(user.email || '');
+        setIsLoggedIn(true);
+        setShippingInfo(prev => ({
+          ...prev,
+          firstName: user.firstName || prev.firstName,
+          lastName: user.lastName || prev.lastName,
+        }));
+      } catch (e) {
+        console.error('Error loading user after login:', e);
       }
     }
   }, []);
@@ -376,6 +403,14 @@ function CheckoutPage() {
   }
   return (
     <div className="min-h-screen" style={{ background: '#f5f3ea' }}>
+      {/* Login Modal for Guest Users */}
+      <LoginModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSuccess={handleLoginSuccess}
+        message="Login for a faster checkout experience!"
+      />
+
       {/* Loading Overlay */}
       {loading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -719,4 +754,4 @@ function CheckoutPage() {
   );
 }
 
-export default withAuth(CheckoutPage);
+export default CheckoutPage;

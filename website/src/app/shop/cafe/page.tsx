@@ -29,7 +29,11 @@ export default function CafePage() {
           const id = product.id?.toLowerCase() || ''
           return category === 'cafe' || collection === 'cafe' || id.startsWith('cafe-')
         })
-        setProducts(filtered)
+        // Deduplicate products by ID
+        const uniqueProducts = Array.from(
+          new Map(filtered.map((p: Product) => [p.id, p])).values()
+        ) as Product[]
+        setProducts(uniqueProducts)
       } catch (error) {
         console.error('Error fetching products:', error)
       } finally {

@@ -244,129 +244,180 @@ export function Navbar() {
           <>
             {/* Backdrop */}
             <div 
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
-              style={{ display: 'block' }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
               onClick={() => setIsMenuOpen(false)}
             />
             
             {/* Slide-in Menu from Right */}
             <div 
-              className="fixed top-0 right-0 h-full bg-[#0b0b12] z-50 transform transition-transform duration-300 ease-in-out shadow-2xl"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-[340px] bg-[#0a0a0a] z-50 overflow-hidden shadow-2xl border-l border-gray-800/50 lg:hidden"
               style={{ 
-                width: '80%', 
-                maxWidth: '320px',
-                transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)'
+                animation: 'slideInRight 0.3s ease-out forwards'
               }}
             >
-                <div className="flex flex-col h-full">
-                  {/* Header with Close Button */}
-                  <div className="flex items-center justify-between p-6 border-b border-gray-800">
-                    <span className="text-xl font-bold neon-text">Menu</span>
-                    <button
-                      onClick={() => setIsMenuOpen(false)}
-                      className="p-2 rounded-full hover:bg-gray-800 transition-colors neon-link"
-                    >
-                      <X className="h-6 w-6 text-white" />
-                    </button>
-                  </div>
-                  
-                  {/* Account Section with Circle Avatar - Now at the bottom for better UX */}
-                  <div className="px-6 py-6 border-b border-gray-800">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
-                        <User className="h-6 w-6 text-gray-300" />
-                      </div>
-                      <div className="flex-1">
-                        {user ? (
-                          <div>
-                            <p className="text-lg font-medium text-white">{user.firstName} {user.lastName}</p>
-                            <p className="text-sm text-gray-400">{user.email}</p>
+              <style jsx>{`
+                @keyframes slideInRight {
+                  from {
+                    transform: translateX(100%);
+                  }
+                  to {
+                    transform: translateX(0);
+                  }
+                }
+              `}</style>
+              
+              <div className="flex flex-col h-full">
+                {/* Header with Close and Logo */}
+                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800/50 bg-[#0a0a0a]">
+                  <span className="text-lg font-bold text-[#c8ff00]" style={{ fontFamily: "var(--font-montserrat)" }}>
+                    Mount Advertising
+                  </span>
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-5 w-5 text-gray-400" />
+                  </button>
+                </div>
+                
+                {/* User Account Section */}
+                <div className="px-5 py-5 bg-gradient-to-r from-gray-900/50 to-transparent border-b border-gray-800/30">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#c8ff00]/20 to-[#c8ff00]/5 rounded-full flex items-center justify-center border border-[#c8ff00]/30">
+                      <User className="h-5 w-5 text-[#c8ff00]" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      {user ? (
+                        <>
+                          <p className="text-base font-medium text-white truncate">
+                            {user.firstName} {user.lastName}
+                          </p>
+                          <p className="text-sm text-gray-400 truncate">{user.email}</p>
+                        </>
+                      ) : (
+                        <div>
+                          <p className="text-sm text-gray-400 mb-2">Welcome, Guest</p>
+                          <div className="flex gap-2">
+                            <Link 
+                              href="/shop/login" 
+                              className="px-4 py-1.5 text-sm font-medium rounded-lg bg-[#c8ff00] text-black hover:bg-[#b8ef00] transition-colors"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              Login
+                            </Link>
+                            <Link 
+                              href="/shop/login?signup=true" 
+                              className="px-4 py-1.5 text-sm font-medium rounded-lg border border-gray-600 text-white hover:border-gray-500 transition-colors"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              Sign Up
+                            </Link>
                           </div>
-                        ) : (
-                          <div>
-                            <p className="text-sm text-gray-400 mb-2">Access your account</p>
-                            <div className="flex space-x-2">
-                                <Link href="/shop/login" className="px-4 py-2 text-sm rounded-md neon-btn" onClick={() => setIsMenuOpen(false)}>
-                                    Login
-                                </Link>
-                                <Link href="/shop/login?signup=true" className="px-4 py-2 text-sm rounded-md neon-btn-secondary" onClick={() => setIsMenuOpen(false)}>
-                                    Create Account
-                                </Link>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  
-                  {/* Menu Items */}
-                  <div className="flex-1 overflow-y-auto">
-                    <div className="px-6 py-4 space-y-1">
-                      {/* Navigation links */}
-                      <Link href="/shop" className="block py-4 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>
-                        <span className="text-lg font-medium neon-link">Home</span>
+                </div>
+                
+                {/* Scrollable Menu Items */}
+                <div className="flex-1 overflow-y-auto overscroll-contain">
+                  <nav className="px-3 py-4">
+                    {/* Main Navigation */}
+                    <div className="space-y-1 mb-6">
+                      <Link 
+                        href="/shop" 
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-gray-800/50 transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <span className="text-base font-medium">Home</span>
                       </Link>
                       
-                      {/* Products Category Links */}
-                      <div className="py-4 border-b border-gray-800">
-                        <div className="flex items-center justify-between">
-                          <span className="text-lg font-medium neon-link">Products</span>
-                          <ChevronRight className="h-5 w-5 text-gray-500" />
-                        </div>
-                        <div className="mt-3 ml-4 space-y-3">
-                          <Link href="/shop" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Shop All</Link>
-                          <Link href="/shop/cafe" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Cafe</Link>
-                          <Link href="/shop/gaming" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Gaming</Link>
-                          <Link href="/shop/neon-signage" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Neon Signage</Link>
-                          <Link href="/shop/led-boards" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>LED Boards</Link>
-                          <Link href="/shop/banners" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Banners</Link>
-                          <Link href="/shop/displays" className="block text-base neon-link" onClick={() => setIsMenuOpen(false)} prefetch>Displays</Link>
-                        </div>
-                      </div>
-
-                      {/* Account link for logged-in users */}
                       {user && (
-                        <Link href="/shop/account" className="block py-4 border-b border-gray-800" onClick={() => setIsMenuOpen(false)}>
-                          <span className="text-lg font-medium neon-link">Account</span>
+                        <Link 
+                          href="/shop/account" 
+                          className="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-gray-800/50 transition-colors"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <span className="text-base font-medium">My Account</span>
                         </Link>
                       )}
+                    </div>
 
-                      {/* Quick actions for mobile */}
-                      <div className="py-4 border-b border-gray-800 space-y-3">
-                        <Link href="/shop/search" className="flex items-center justify-between" onClick={() => setIsMenuOpen(false)}>
-                          <span className="text-base neon-link">Search products</span>
-                          <Search className="h-5 w-5 text-gray-400" />
+                    {/* Categories Section */}
+                    <div className="mb-6">
+                      <p className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Shop by Category
+                      </p>
+                      <div className="space-y-1">
+                        <Link href="/shop" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Shop All</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
                         </Link>
-                        <Link href="/shop/orders" className="flex items-center justify-between" onClick={() => setIsMenuOpen(false)}>
-                          <span className="text-base neon-link">Track orders</span>
-                          <Package className="h-5 w-5 text-gray-400" />
+                        <Link href="/shop/cafe" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Cafe</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
+                        </Link>
+                        <Link href="/shop/gaming" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Gaming</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
+                        </Link>
+                        <Link href="/shop/neon-signage" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Neon Signage</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
+                        </Link>
+                        <Link href="/shop/led-boards" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>LED Boards</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
+                        </Link>
+                        <Link href="/shop/banners" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Banners</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
+                        </Link>
+                        <Link href="/shop/displays" className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <span>Displays</span>
+                          <ChevronRight className="h-4 w-4 text-gray-600" />
                         </Link>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Footer with Logout button */}
-                  {user ? (
-                    <div className="p-6 mt-auto border-t border-gray-800">
-                      <button 
-                        onClick={() => {
-                          handleLogout();
-                          setIsMenuOpen(false);
-                        }}
-                        className="w-full text-center px-4 py-3 rounded-md neon-btn-secondary"
-                      >
-                        Logout
-                      </button>
+                    {/* Quick Actions */}
+                    <div className="mb-6">
+                      <p className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Quick Actions
+                      </p>
+                      <div className="space-y-1">
+                        <Link href="/shop/search" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <Search className="h-5 w-5 text-gray-500" />
+                          <span>Search Products</span>
+                        </Link>
+                        <Link href="/shop/orders" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                          <Package className="h-5 w-5 text-gray-500" />
+                          <span>Track Orders</span>
+                        </Link>
+                      </div>
                     </div>
-                  ) : (
-                     <div className="p-6 mt-auto border-t border-gray-800">
-                        {/* This space is intentionally left blank for guests, login is at the top */}
-                     </div>
-                  )}
+                  </nav>
                 </div>
+
+                {/* Footer with Logout */}
+                {user && (
+                  <div className="px-5 py-4 border-t border-gray-800/50 bg-[#0a0a0a]">
+                    <button 
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full py-3 px-4 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors text-sm font-medium"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
               </div>
-            </>
-          )}
+            </div>
+          </>
+        )}
       </nav>
       
       {/* Sliding Cart Panel */}

@@ -9,11 +9,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Protect admin routes, but allow access to the login page
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+  // Protect admin routes (both /admin and /shop/admin), but allow access to login pages
+  const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/shop/admin');
+  const isAdminLoginPage = pathname === '/admin/login' || pathname === '/shop/admin/login';
+  
+  if (isAdminRoute && !isAdminLoginPage) {
     const token = request.cookies.get('admin-token')?.value;
 
-    const loginUrl = new URL('/admin/login', request.url);
+    // Determine the correct login URL based on the pathname
+    const loginPath = pathname.startsWith('/shop/admin') ? '/shop/admin/login' : '/admin/login';
+    const loginUrl = new URL(loginPath, request.url);
 
     if (!token) {
       loginUrl.searchParams.set('from', pathname);
@@ -44,6 +49,7 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     '/((?!_next/static|_next/image|favicon.ico).*)',
-    '/admin/:path*'
+    '/admin/:path*',
+    '/shop/admin/:path*'
   ],
 };
