@@ -11,14 +11,16 @@ function SearchContent() {
   const router = useRouter();
   const query = searchParams ? searchParams.get("q") || "" : "";
   const [searchInput, setSearchInput] = useState(query);
-  const [results, setResults] = useState<Array<{
+  type SearchResult = {
     id: string;
     name: string;
     collection: string;
     category?: string;
     price: number | string;
     images?: string[];
-  }>>([]);
+  };
+
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -39,15 +41,15 @@ function SearchContent() {
       .then(res => res.json())
       .then(data => {
         if (data.success || data.products) {
-          const products = data.products || [];
-          const filtered = products.filter((p: any) => 
+          const products: SearchResult[] = (data.products || []) as SearchResult[];
+          const filtered = products.filter((p) => 
             p.name?.toLowerCase().includes(query.toLowerCase()) ||
             p.description?.toLowerCase().includes(query.toLowerCase()) ||
             p.category?.toLowerCase().includes(query.toLowerCase())
           );
           // Deduplicate products by ID
-          const uniqueResults = Array.from(
-            new Map(filtered.map((p: any) => [p.id, p])).values()
+          const uniqueResults: SearchResult[] = Array.from(
+            new Map(filtered.map((p) => [p.id, p])).values()
           );
           setResults(uniqueResults);
         } else {
