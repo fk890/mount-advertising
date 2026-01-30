@@ -14,6 +14,7 @@ function SearchContent() {
   type SearchResult = {
     id: string;
     name: string;
+    description?: string;
     collection: string;
     category?: string;
     price: number | string;
